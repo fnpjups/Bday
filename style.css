@@ -1,0 +1,101 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* avoid horizontal scroll */
+}
+
+body {
+  position: relative;
+  font-family: sans-serif;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* full viewport height */
+  background: url(The\ contents\ of\ my\ heart.png) center center / cover no-repeat fixed;
+}
+
+/* overlay layer */
+body::after {
+  content: "";
+  position: fixed; /* fixed so it stays on viewport */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6); /* black with opacity for darkening */
+  pointer-events: none; /* allow clicks to pass through */
+  z-index: 0;
+}
+
+/* your content should be above the overlay */
+.container {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 600px;
+  padding: 20px;
+}
+
+a.button {
+    padding: 15px 30px;
+    font-size: 1.5em;
+    background-color: #8a2be2; /* violet purple */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(138, 43, 226, 0.7);
+    transition: background-color 0.3s, transform 0.2s;
+}
+a.button:hover {
+    background-color: #6a1db8; /* darker purple on hover */
+    transform: scale(1.05);
+}
+
+@keyframes glowFadeIn {
+  0% {
+    opacity: 0;
+    text-shadow: none;
+  }
+  50% {
+    opacity: 1;
+    text-shadow: 0 0 10px #8a2be2, 0 0 20px #8a2be2;
+  }
+  100% {
+    text-shadow: 0 0 5px #8a2be2, 0 0 10px #8a2be2;
+  }
+}
+
+@keyframes breathing {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+h1 {
+  animation: glowFadeIn 2s ease forwards, breathing 3s ease-in-out infinite;
+  max-width: 600px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Responsive font size for small screens */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 18px; /* smaller font size on mobile */
+  }
+  a.button {
+    padding: 10px 20px;
+    font-size: 18px;
+  }
+}
