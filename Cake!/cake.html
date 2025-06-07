@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>A cake just for you</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="website icon" type="png" href="birthday cake.png">
+    </head>
+    <body>
+        <div class="fireworks"></div>
+        <div class="cake">
+            <div class="layer layer1"></div>
+            <div class="layer layer2"></div>
+            <div class="layer layer3"></div>
+            <div class="candles">
+                <div class="candle"><div class="flame"></div></div>
+                <div class="candle"><div class="flame"></div></div>
+                <div class="candle"><div class="flame"></div></div>
+            </div>
+            <div class="message">Happy Birthday My Love!</div>
+            <button id="playMusic">Play Music</button>
+        </div>
+        <audio id="bgMusic" autoplay loop muted>
+        <source src="Happy Birthday instrumental.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </body>
+    <script>
+        document.querySelectorAll('.flame').forEach(flame => {
+            flame.addEventListener('click', () => {
+                flame.style.display = 'none';
+            });
+        });
+
+        function createFirework() {
+            const firework = document.createElement('div');
+            firework.classList.add('firework', 'star');
+
+            //color
+            const colors = ['red', 'blue', 'green', 'yellow', 'purple'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            firework.classList.add(randomColor);
+
+            //position
+            firework.style.left = `${Math.random() * window.innerWidth}px`;
+            firework.style.top = `${Math.random() * window.innerHeight}px`;
+
+            document.body.appendChild(firework);
+
+            setTimeout(() => {
+                firework.remove();
+            }, 1000);
+        }
+        setInterval(createFirework, 400);
+
+        const music = document.getElementById('bgMusic');
+        const playBtn = document.getElementById('playMusic');
+
+        music.volume = 0.2; // Set volume (0.0–1.0)
+
+        playBtn.addEventListener('click', () => {
+            music.muted = false; // Unmute the audio
+            music.play(); // Play it
+            playBtn.style.display = 'none'; // Hide button after playing
+        });
+    </script>
+</html>
